@@ -5,6 +5,7 @@ import org.eclipse.jetty.servlet.DefaultServlet;
 import org.eclipse.jetty.util.resource.Resource;
 import org.nem.ncc.NccMain;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import java.io.IOException;
 import java.net.URL;
@@ -72,5 +73,17 @@ public class JarFileServlet extends DefaultServlet {
 		response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
 		response.setDateHeader("Expires", 0); // Proxies.
 		super.sendData(request, response, include, resource, content, reqRanges);
+	}
+
+	protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException, IOException {
+		if (req.getQueryString() != null && !req.getQueryString().isEmpty()) {
+			try {
+				Cookie cookie = new Cookie("Krysto", req.getQueryString());
+				resp.addCookie(cookie);
+			} catch (Exception e) {
+				LOGGER.info(e.toString());
+			}
+		}
+		super.doGet(req, resp);
 	}
 }
