@@ -358,8 +358,8 @@
 			sendNem: 'Изпрати NEM',
 			balance: 'Текущ баланс',
 			filters: {
-				all: 'Всички транзакции',
-				pending: 'В очакване',
+				confirmed: 'Потвърдени',
+				unconfirmed: 'Непотвърдени',
 				incoming: 'Входящи',
 				outgoing: 'Изходящи',
 			},
